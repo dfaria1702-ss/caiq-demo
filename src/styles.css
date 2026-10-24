@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", "Noto Sans Devanagari", "Noto Sans Gujarati", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-native: "Noto Sans Devanagari", "Noto Sans Gujarati", "Geist", system-ui, sans-serif;
+
+  --color-bg: #09090b;
+  --color-surface: #111114;
+  --color-surface-2: #17171b;
+  --color-edge: #222228;
+  --color-edge-2: #2e2e36;
+  --color-fg: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-faint: #6b6b74;
+  --color-accent: #ff8f3f;
+  --color-accent-2: #ffb27a;
+  --color-ok: #4ade80;
+  --color-warn: #facc15;
+  --color-bad: #f87171;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+body {
+  background-image: radial-gradient(900px 420px at 50% -120px, rgba(255, 143, 63, 0.10), transparent 70%);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.font-native {
+  font-family: var(--font-native);
+  line-height: 1.5;
+}
+
+::selection {
+  background: rgba(255, 143, 63, 0.35);
+}
+
+/* Indeterminate progress shimmer */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 143, 63, 0.9), transparent);
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.fade-up {
+  animation: fade-up 0.4s ease-out both;
+}
+
+/* Invisible native range on top of the custom slang track (keeps keyboard + a11y). */
+input[type="range"].range-overlay {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  inset: -10px 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+video::-webkit-media-controls-panel {
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+}
